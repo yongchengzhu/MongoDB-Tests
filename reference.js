@@ -1,33 +1,19 @@
+//------------------------------------------------------------------------------
+// App Requirements
+//------------------------------------------------------------------------------
+
 var mongoose = require("mongoose");
+
+//------------------------------------------------------------------------------
+// Database Configurations
+//------------------------------------------------------------------------------
 
 mongoose.connect(
     "mongodb://localhost:27017/reference_app", {useNewUrlParser: true}
 );
-//------------------------------------------------------------------------------
-// Post Schema: title, content
-//------------------------------------------------------------------------------
 
-var postSchema = new mongoose.Schema({
-    title: String,
-    content: String
-});
-
-var Post = mongoose.model("Post", postSchema);
-
-//------------------------------------------------------------------------------
-// User Schema: name, email, posts
-//    * One user can have many posts. (By reference this time.)
-//------------------------------------------------------------------------------
-var userSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    posts: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Post"
-    }]
-});
-
-var User = mongoose.model("User", userSchema);
+var Post = require("./models/post.js");
+var User = require("./models/user.js");
 
 //------------------------------------------------------------------------------
 // Create new data; one-time use.
@@ -46,8 +32,8 @@ var User = mongoose.model("User", userSchema);
 // });
 
 Post.create({
-    title: "Nya part. 2",
-    content: "Nya Nya Nya Nya Nya :3"
+    title: "Nya part. 5",
+    content: "Nya Nya Nya Nya Nya :3 part. 5"
 }, function(err, createdPost) {
     if (err) {
         console.log(err);
